@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Blog-WriteFreely",
+    "slug": "Blog-WriteFreely",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appIcon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splashScreen.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptiveIcon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.hamzii.se.Musings"
+    },
+    "web": {
+      "favicon": "./assets/favIcon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3ad30be3-1958-4bf9-aa89-da8def34cd22"
+      }
+    }
+  }
+}
