@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, ImageBackground,Linking} from
 
 
   const CreatePostLink = () => {
-    const onPress = () => Linking.canOpenURL('http://localhost:3000/').then(() => {
-      Linking.openURL('http://localhost:3000/');
+    const onPress = () => Linking.canOpenURL('https://blog-writefreely-adminpanel.onrender.com/').then(() => {
+      Linking.openURL('https://blog-writefreely-adminpanel-or3t.onrender.com/');
   });
 
   return (

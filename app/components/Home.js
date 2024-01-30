@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, ImageBackground, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, ImageBackground, Text, View ,size} from "react-native";
 import Constants from "expo-constants";
-
+import { MaterialIcons } from '@expo/vector-icons';
 import { getFeaturedPosts, getLatestPosts } from "../api/post";
 import PostListItem from "./PostListItem";
 import Separator from "./Separator";
@@ -15,6 +15,16 @@ export default function Home({ navigation }) {
 	const [latestPosts, setLatestPosts] = useState([]);
 	const [reachedEnd, setReachedEnd] = useState(false);
 	const [loading, setLoading] = useState(false);
+
+	const RefreshControl= async() => {
+		useEffect(() => {
+			const unsubscribe = navigation.addListener("focus", () => {
+				fetchLatestPosts() // Gets fired whenever this screen is in focus
+			});
+		  
+		  }, [navigation]);
+	};
+	
 
 	const fetchFeaturedPosts = async () => {
 		const { success, message, featuredPosts } = await getFeaturedPosts();
@@ -62,16 +72,49 @@ export default function Home({ navigation }) {
 			setLoading(false);
 		};
 	}, []);
+	const [buttonColor, setButtonColor] = useState('black');
+  const [clicked, setClicked] = useState(false);
+
+  const handleButtonClick = () => {
+    setButtonColor('grey');
+    setClicked(true);
+  };
+
+  useEffect(() => {
+    if (clicked) {
+      const timer = setTimeout(() => {
+        setButtonColor('black');
+        setClicked(false);
+      }, 2000);
+
+      return () => {
+        clearTimeout(timer);
+        setClicked(false); // Reset the clicked state after cleanup
+      };
+    }
+  }, [clicked]);
 
 	const ListHeaderComponent = useCallback(() => {
 		// useCallback is used to prevent re-rendering of the component
 		return (
 			<View style={{ paddingTop: Constants.statusBarHeight }}>
 				{featuredPosts.length ? <Slider onSlidePress={handlePostPress} title="Featured Posts" data={featuredPosts} /> : null}
-				<View style={{ marginTop: 15 }}>
+				<View style={{ marginTop: 15}}>
 					<Separator />
+					
 					<Text style={{ fontSize: 20, color: "#383838", fontWeight: "700", marginTop: 15 }}>Latest Posts</Text>
-				</View>
+					<View style={{marginTop: 15,position: 'absolute', right: 0}}>
+					{featuredPosts.length ? <MaterialIcons name="refresh" size={34} color={buttonColor} 
+
+					onPress={() => {
+					handleButtonClick();
+                     fetchLatestPosts();
+					 fetchFeaturedPosts();
+                    console.log('You tapped the button!');
+               }} />: null}
+					</View>
+					
+ 				</View>
 			</View>
 		);
 	}, [featuredPosts]);
@@ -113,7 +156,7 @@ export default function Home({ navigation }) {
 		
 		}}  imageStyle= 
 		{{opacity:0.4}}>
-
+ 
 		<FlatList
 			data={latestPosts}
 			keyExtractor={(item) => item._id}

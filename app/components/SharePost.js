@@ -5,11 +5,11 @@ import { FontAwesome } from "@expo/vector-icons";
 const SharePost = ({ post }) => {
 	return (
 		<View style={{ marginTop: 10 }}>
-			<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 10 }}>
-				<View>
+			<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", margin: 10 }}>
+				{/* <View>
 					<Text style={{ color: "#827E7E", fontSize: 18, fontWeight: "700" }}> Share this post </Text>
-				</View>
-				<View style={{ flexDirection: "row" }}>
+				</View> */}
+				<View style={{ flexDirection: "row" ,justifyContent:"center"}}>
 					<TouchableOpacity
 						style={styles.touchableOpacity}
 						onPress={() => {
@@ -25,22 +25,11 @@ const SharePost = ({ post }) => {
 						onPress={() => {
 							Linking.openURL(
 								`whatsapp://send?text=${
-									"*" + post.title + "*" + "\n\n" + post.content.substring(0, 800) + "..." + "\n\n*Read more at " + "Hamza's Blog App*"
+									"*" + post.title + "*" + "\n\n" + post.content.substring(0, 800) + "..." + "\n\n*Read more at " + "Blog App*"
 								}`
 							);
 						}}>
 						<FontAwesome name="whatsapp" size={24} color="#fff" />
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.touchableOpacity}
-						onPress={() => {
-							Linking.openURL(
-								`https://twitter.com/intent/tweet?text=${
-									post.title + "\n\n" + post.content.substring(0, 1000) + "..." + "\n\nRead more at " + "Hamza's Blog App"
-								}`
-							);
-						}}>
-						<FontAwesome name="twitter" size={24} color="#fff" />
 					</TouchableOpacity>
 				</View>
 			</View>

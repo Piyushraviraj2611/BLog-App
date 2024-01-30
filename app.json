@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.hamzii.se.Musings"
+      "package": "com.Blog-WriteFreely.Musings"
     },
     "web": {
       "favicon": "./assets/favIcon.png"
